@@ -1,16 +1,20 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import About from '../components/About.astro'
+import Layout from "../layouts/Layout.astro";
+import About from "../components/About.astro";
+import Hero from "../components/Hero.astro";
 ---
 
 <Layout>
-	<div class="header">
-		<h1>🍄 the fhungus</h1>
-		INTERDISCIPLINARY AMATEURIST, FULL-SCALE 10 DECIMAL PRECISION FART SMELLA.
+	<Hero />
+
+	<div class="mottle-wrapper">
+		<div class="mottle"></div>
+		<div class="mottle"></div>
+		<div class="mottle"></div>
 	</div>
 
 	<div class="about-wrapper">
-		<About/>
+		<About />
 	</div>
 </Layout>
 
@@ -20,11 +24,36 @@ import About from '../components/About.astro'
 	}
 
 	.about-wrapper {
+		padding-top: 3em;
 		position: relative;
 		left: 0;
 		right: 0;
 
-		display:flex;
+		display: flex;
 		justify-content: center;
+	}
+
+	.mottle-wrapper {
+		margin-top: 4em;
+		margin-bottom: 4em;
+	}
+
+	.mottle {
+		content: " ";
+
+		rotate: 2deg;
+		width: 150vw;
+		height: 2em;
+
+		background: linear-gradient(
+			0deg,
+			rgba(21, 21, 21, 0) 0%,
+			rgba(24, 21, 22, 0.423) 20%,
+			rgba(10, 9, 9, 0.834) 45%,
+			rgba(33, 29, 27, 1) 56%,
+			rgb(48, 45, 44) 72%,
+			rgba(34, 33, 33, 0.609) 86%,
+			rgba(29, 29, 29, 0) 100%
+		);
 	}
 </style>
