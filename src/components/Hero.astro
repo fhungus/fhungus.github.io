@@ -20,13 +20,15 @@ import Rain from './rain/Rain.svelte'
     }
 
     .header {
-        background: linear-gradient(180deg,rgb(179, 208, 211) 0%, rgb(130, 156, 153) 40%, rgb(130, 140, 114)100%);
+        background: radial-gradient(125% 100% at bottom,rgb(209, 178, 120) 0%, rgb(161, 132, 101) 50%, rgb(106, 89, 89)100%);
+
+        z-index: 2;
 
         border-radius: 0 0 1em 1em;
         border-width: 2px;
         border-top: 0;
         border-style: solid;
-        border-color: #AAAAAA55;
+        border-color: var(--bg2);
 
         width: 67vw;
         height: 21em;

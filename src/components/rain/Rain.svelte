@@ -40,7 +40,7 @@
                 const othery = Math.floor(drop.position.y - (drop.velocity.y * 0.25));
 
                 let gradient = ctx.createLinearGradient(Math.floor(drop.position.x), Math.floor(drop.position.y), otherx, othery);
-                const color = "168,205,189"
+                const color = "205,205,177"
                 gradient.addColorStop(1, `rgba(${color},0)`)
                 gradient.addColorStop(0, `rgba(${color},${drop.opacity})`);
                 ctx.fillStyle = gradient;
