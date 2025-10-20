@@ -19,6 +19,7 @@ import Rain from './rain/Rain.svelte'
         right: 0;
     }
 
+
     .header {
         background: radial-gradient(125% 100% at bottom,rgb(209, 178, 120) 0%, rgb(161, 132, 101) 50%, rgb(106, 89, 89)100%);
 
@@ -28,7 +29,7 @@ import Rain from './rain/Rain.svelte'
         border-width: 2px;
         border-top: 0;
         border-style: solid;
-        border-color: var(--bg2);
+        border-color: var(--border);
 
         width: 67vw;
         height: 21em;
@@ -42,6 +43,13 @@ import Rain from './rain/Rain.svelte'
         text-align: center;
 
         align-content: center;
+    }	
+    
+    @media (width <= 64rem) {
+        .header {
+            width: 100vw;
+            border-radius: 0vw;
+        }
     }
 
     .header-title {

@@ -30,8 +30,7 @@
         let drawingTimeout: NodeJS.Timeout;
         let onTimeout = () => {
             ctx.clearRect(0,0,canvas.width,canvas.height);
-            ctx.lineWidth = 1;
-            drops.step(10/1000, mouseincanvas ? {x: mousex, y: mousey} : null);
+            drops.step(45/1000, mouseincanvas ? {x: mousex, y: mousey} : null);
 
             ctx.beginPath();
 
@@ -40,9 +39,11 @@
                 const othery = Math.floor(drop.position.y - (drop.velocity.y * 0.25));
 
                 let gradient = ctx.createLinearGradient(Math.floor(drop.position.x), Math.floor(drop.position.y), otherx, othery);
+                let antiopacity = 1 / drop.opacity;
                 const color = "205,205,177"
                 gradient.addColorStop(1, `rgba(${color},0)`)
                 gradient.addColorStop(0, `rgba(${color},${drop.opacity})`);
+                ctx.lineWidth = 2 * antiopacity;
                 ctx.fillStyle = gradient;
                 ctx.strokeStyle = gradient;
                 ctx.beginPath();
@@ -51,11 +52,11 @@
                 ctx.closePath();
                 ctx.stroke();
                 ctx.beginPath();
-                ctx.arc(drop.position.x, drop.position.y, 2, 0, Math.PI*2);
+                ctx.arc(drop.position.x, drop.position.y, 1.5 * antiopacity, 0, Math.PI*2);
                 ctx.closePath();
                 ctx.fill();
             });
-            drawingTimeout = setTimeout(onTimeout, 1);
+            drawingTimeout = setTimeout(onTimeout, 1000/45);
         }
         onTimeout();
 

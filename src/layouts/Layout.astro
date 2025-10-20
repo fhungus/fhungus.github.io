@@ -43,12 +43,20 @@ import Bar from "../components/Bar.astro";
 
 		--fg: honeydew;
 		--bg: rgb(21, 16, 18);
-		--bg2: rgb(86, 74, 66);
+		--bg2: rgb(39, 31, 28);
+		--border: rgb(86, 74, 66);
 
 		background-color: var(--bg);
 		color: var(--fg);
 
 		min-height: 100vh;
+	}
+
+	.bordered {
+        border-width: 2px;
+        border-top: 0;
+        border-style: solid;
+        border-color: var(--bg2);
 	}
 
 	footer {
