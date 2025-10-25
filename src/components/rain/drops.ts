@@ -38,7 +38,7 @@ class Drops {
                 const xpos = range(Math.random(), 0, 1, -this.w/2, this.w + (this.w/2));
                 this.drops.push({
                     velocity: {x: 250, y: 1000} as Vec,
-                    position: {x: xpos, y: 0} as Vec,
+                    position: {x: xpos, y: 0 - range(Math.random(),  0, 1, 0, 10)} as Vec,
                     opacity: Math.random(),
                     bounced: false
                 })
