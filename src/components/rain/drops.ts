@@ -32,7 +32,7 @@ class Drops {
 
     step(dt: number, mouse: {x: number, y: number} | null) {
         // add new raindrops, maybe
-        const chance = range(Math.random(), 0, 1, -1,30);
+        const chance = range(Math.random(), 0, 1, -1,100);
         if (chance > 0) {
             for (let i=0; i<chance; i++) {
                 const xpos = range(Math.random(), 0, 1, -this.w/2, this.w + (this.w/2));
