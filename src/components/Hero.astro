@@ -7,12 +7,15 @@ import Rain from './rain/Rain.svelte'
         <h1 class="header-title">fhungus</h1>
         <Rain client:only="svelte"/>
     </div>
+    <div class="outer-image">
+        <img class="guh" src="/public/images/franklins-journey.png"/>
+    </div>
 </div>
 
 <style>
     .header-outer {
         display: flex;
-        justify-content: center;
+        justify-content: stretch;
 
         position: relative;
         left: 0;
@@ -21,18 +24,18 @@ import Rain from './rain/Rain.svelte'
 
 
     .header {
-        background: radial-gradient(125% 100% at bottom,rgb(209, 178, 120) 0%, rgb(161, 132, 101) 50%, rgb(106, 89, 89)100%);
+        background: radial-gradient(200% 100% at bottom right,rgb(238, 130, 6) 0%, rgb(255, 199, 80) 50%, rgb(115, 223, 192)100%);
 
         z-index: 2;
 
-        border-radius: 0 0 1em 1em;
+        border-radius: 0 0 1em 0;
         border-width: 2px;
         border-top: 0;
         border-style: solid;
         border-color: var(--border);
 
         width: 67vw;
-        height: 21em;
+        height: 30em;
 
         padding: 1em;
 
@@ -40,16 +43,41 @@ import Rain from './rain/Rain.svelte'
 
         display: flexbox;
         flex-direction: column;
-        text-align: center;
-
-        align-content: center;
+        text-align: end;
+        align-content: end;
     }	
-    
-    @media (width <= 64rem) {
+
+    .header h1 {
+        mix-blend-mode: color-dodge;
+        color: #5cb396;
+
+        margin-right: 0.2em;
+
+        font-size: 10em;
+        font-weight: 500;
+    }
+
+    @media (width <= 80rem) {
         .header {
             width: 100vw;
             border-radius: 0vw;
+            text-align: start;
         }
+        .outer-image {
+            z-index: 2;
+            position: absolute;
+        }
+    }
+    
+    .outer-image {
+        position: relative;
+        flex: auto;
+    }
+
+    .guh {
+        height:100%;
+        right: 0;
+        position: absolute;
     }
 
     .header-title {

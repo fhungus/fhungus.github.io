@@ -1,5 +1,8 @@
 ---
-import Bar from "../components/Bar.astro";
+import Bar from "../../components/Bar.astro";
+const { frontmatter } = Astro.props;
+
+const accent = frontmatter.color != null ? frontmatter.color : "#d58847";
 ---
 
 <!doctype html>
@@ -8,13 +11,21 @@ import Bar from "../components/Bar.astro";
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>FHUNGUS IS HERE.</title>
+		<meta name="generator" charset="utf-8" content={Astro.generator} />
+		<title>{frontmatter.title} (fhungus)</title>
 	</head>
 
 	<body>
 		<Bar />
-		<slot />
+        <div class="content-wrapper">
+            <div class="content-title">
+                <h1> {frontmatter.title} </h1>
+            </div>
+            <div class="content-bg bordered">
+		        <slot/>
+            </div>
+        </div>
+        <fuckass/>
 		<footer>
 			You are browsing the Fhungus-related Unifying Classificatory Knowledge System, an autobiographical repository of fhungus-related description and output.
 			Rights unreserved.
@@ -22,7 +33,7 @@ import Bar from "../components/Bar.astro";
 	</body>
 </html>
 
-<style is:global>
+<style is:global define:vars={{accent}}>
 	@font-face {
 		font-family: "GoMono";
 		src: url('/fonts/gomono.ttf') format("truetype");
@@ -51,15 +62,18 @@ import Bar from "../components/Bar.astro";
 
 		position: relative;
 
+        display: flexbox;
+        align-content: center;
+
 		margin: 0;
-		min-width: 100vw;
+		width: 100%;
 		min-height: 100vh;
 
 		--fg: #FBC6B3;
-        --accent: rgb(226, 185, 131);
+        --accent: {accent};
 		--bg: #1A140F;
-		--bg2: #2F2419;
-		--border: #875F47;
+		--bg2: rgb(39, 31, 28);
+		--border: rgb(86, 74, 66);
 
 		background-color: var(--bg);
 		color: var(--fg);
@@ -76,16 +90,47 @@ import Bar from "../components/Bar.astro";
         left: 0;
         right: 0;
     
-        height: 20em;
+        height: 25em;
         z-index: -1;
 
         background: linear-gradient(0deg, transparent, var(--accent));
-        opacity: 21%;
+        opacity: 50%;
+    }
+
+    .content-wrapper {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 70em;
+    }
+
+    .content-bg {
+        padding: 5em;
+        background-color: var(--bg2);
+
+        border-radius: 5px;
+    }
+
+    .content-title {
+        background-color: var(--accent);
+        padding: 0em 2em 0em 2em;
+
+        border-radius: 5px;
+        margin-left: 2em;
+        margin-bottom: 0.5em;
+
+        display: inline-flex;
+    }
+
+    .content-title > h1 {
+        color: var(--bg);
+        font-weight: bold;
+        font-size: 5em;
+
+        display: inline;
     }
 
 	.bordered {
         border-width: 2px;
-        border-top: 0;
         border-style: solid;
         border-color: var(--border);
 	}
@@ -98,8 +143,7 @@ import Bar from "../components/Bar.astro";
 		left: 0;
 
 		background-color: rgb(19, 12, 11);
-		padding: 1em;
-		padding-bottom: 5em;
+		padding: 1em 2em 5em 2em;
 	}
 
     footer::after {
@@ -114,8 +158,4 @@ import Bar from "../components/Bar.astro";
 
         background: linear-gradient(0deg, transparent, var(--bg));
     }
-
-    @media (width <= 80rem) {
-
-	}
 </style>

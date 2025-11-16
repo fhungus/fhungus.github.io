@@ -6,6 +6,7 @@
 
     let canvas: HTMLCanvasElement;
     onMount(() => {
+        //FIXME: when screen size changes, canvas does not update its own size! make it listen for size changes and change accordingly
         let rect = canvas.getBoundingClientRect();
         canvas.height = rect.height;
         canvas.width = rect.width;
@@ -40,7 +41,8 @@
 
                 let gradient = ctx.createLinearGradient(Math.floor(drop.position.x), Math.floor(drop.position.y), otherx, othery);
                 let antiopacity = 1 / drop.opacity;
-                const color = "205,205,177"
+                const color = "52,85,68"
+
                 gradient.addColorStop(1, `rgba(${color},0)`)
                 gradient.addColorStop(0, `rgba(${color},${drop.opacity})`);
                 ctx.lineWidth = 2 * antiopacity;
@@ -70,7 +72,7 @@
 
 <style>
     .rain {
-        z-index: 2;
+        z-index: 21;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -78,5 +80,6 @@
         left: 0;
         width: 100%;
         height: 100%;
+        mix-blend-mode: color-dodge;
     }
 </style>
