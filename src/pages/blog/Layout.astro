@@ -2,7 +2,7 @@
 import Bar from "../../components/Bar.astro";
 const { frontmatter } = Astro.props;
 
-const accent = frontmatter.color != null ? frontmatter.color : "#d58847";
+const accent = frontmatter?.color != null ? frontmatter.color : "#d58847";
 ---
 
 <!doctype html>
@@ -12,14 +12,14 @@ const accent = frontmatter.color != null ? frontmatter.color : "#d58847";
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" charset="utf-8" content={Astro.generator} />
-		<title>{frontmatter.title} (fhungus)</title>
+		<title>{frontmatter?.title} (fhungus)</title>
 	</head>
 
 	<body>
 		<Bar />
         <div class="content-wrapper">
             <div class="content-title">
-                <h1> {frontmatter.title} </h1>
+                <h1> {frontmatter?.title} </h1>
             </div>
             <div class="content-bg bordered">
 		        <slot/>
