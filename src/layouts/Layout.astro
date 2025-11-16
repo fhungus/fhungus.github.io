@@ -13,32 +13,58 @@ import Bar from "../components/Bar.astro";
 	</head>
 
 	<body>
+		<!--I STOLE THIS!!! -->
+		<svg width="100%" height="100%" class="background-pattern">
+			<pattern
+				id="pattern-circles"
+				x="0"
+				y="0"
+				width="20"
+				height="20"
+				patternUnits="userSpaceOnUse"
+				patternContentUnits="userSpaceOnUse"
+			>
+				<circle
+					id="pattern-circle"
+					cx="10"
+					cy="10"
+					r="2"
+					fill="#2f241955"></circle>
+			</pattern>
+
+			<rect
+				id="rect"
+				x="0"
+				y="0"
+				width="100%"
+				height="100%"
+				fill="url(#pattern-circles)"></rect>
+		</svg>
+
 		<Bar />
 		<slot />
-		<footer>
-			hello this is the footer we're footing it
-		</footer>
+		<footer>hello this is the footer we're footing it</footer>
 	</body>
 </html>
 
 <style is:global>
 	@font-face {
 		font-family: "GoMono";
-		src: url('/fonts/gomono.ttf') format("truetype");
+		src: url("/fonts/gomono.ttf") format("truetype");
 		font-weight: normal;
 		font-style: normal;
 		font-display: swap;
 	}
 	@font-face {
 		font-family: "GoMono";
-		src: url('/fonts/gomono-bold.ttf') format("truetype");
+		src: url("/fonts/gomono-bold.ttf") format("truetype");
 		font-weight: bold;
 		font-style: normal;
 		font-display: swap;
 	}
-    @font-face {
+	@font-face {
 		font-family: "GoMono";
-		src: url('/fonts/gomono-bolditalic.ttf') format("truetype");
+		src: url("/fonts/gomono-bolditalic.ttf") format("truetype");
 		font-weight: bold;
 		font-style: italic;
 		font-display: swap;
@@ -54,44 +80,44 @@ import Bar from "../components/Bar.astro";
 		min-width: 100vw;
 		min-height: 100vh;
 
-		--fg: #FBC6B3;
-        --accent: rgb(226, 185, 131);
-		--bg: #1A140F;
-		--bg2: #2F2419;
-		--border: #875F47;
+		--fg: #fbc6b3;
+		--accent: rgb(226, 185, 131);
+		--bg: #1a140f;
+		--bg2: #2f2419;
+		--border: #875f47;
 
 		background-color: var(--bg);
 		color: var(--fg);
 
 		min-height: 100vh;
-        z-index: -10;
+		z-index: -10;
 	}
 
-    body::after {
-        content: " ";
+	body::after {
+		content: " ";
 
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-    
-        height: 20em;
-        z-index: -1;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
 
-        background: linear-gradient(0deg, transparent, var(--accent));
-        opacity: 21%;
-    }
+		height: 20em;
+		z-index: -1;
+
+		background: linear-gradient(0deg, transparent, var(--accent));
+		opacity: 21%;
+	}
 
 	.bordered {
-        border-width: 2px;
-        border-top: 0;
-        border-style: solid;
-        border-color: var(--border);
+		border-width: 2px;
+		border-top: 0;
+		border-style: solid;
+		border-color: var(--border);
 	}
 
 	footer {
-        margin-top: 5em;
-		position: relative;
+		margin-top: 10em;
+		position: absolute;
 		bottom: 0;
 		right: 0;
 		left: 0;
@@ -101,20 +127,28 @@ import Bar from "../components/Bar.astro";
 		padding-bottom: 5em;
 	}
 
-    footer::after {
-        content: " ";
+	footer::after {
+		content: " ";
 
-        position: absolute;
+		position: absolute;
 		top: 0;
 		right: 0;
 		left: 0;
-        
-        height: 1em;
 
-        background: linear-gradient(0deg, transparent, var(--bg));
-    }
+		height: 1em;
 
-    @media (width <= 80rem) {
+		background: linear-gradient(0deg, transparent, var(--bg));
+	}
 
+	.background-pattern {
+		z-index: -1;
+		position: absolute;
+		top:0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	@media (width <= 80rem) {
 	}
 </style>
