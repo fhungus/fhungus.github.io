@@ -6,7 +6,8 @@
 
     import range from './range'
 
-    let active = $state(true);
+    
+    let active = $state(localStorage.getItem("fish_paused") == "n");
 
     // i have GOTTA start abstracting some of this shit!!!
     class AffirmationEntity {
@@ -205,7 +206,10 @@
     })
 </script>
 <div class="affirmations">
-    <button class="affirmations_button" onclick={()=>{active=!active}}>
+    <button class="affirmations_button" onclick={()=>{
+        active=!active
+        localStorage.setItem("fish_paused", active ? "n" : "y")
+    }}>
         <div>
             {active ? "):<" : "(:"}
         </div>
