@@ -13,6 +13,16 @@ import Rain from './rain/Rain.svelte'
 </div>
 
 <style>
+    @keyframes letsgooo {
+        0% {
+            filter: opacity(0) brightness(2) blur(50px);
+        }
+        70% {
+        }
+        100% {
+            filter: opacity(1) brightness(1) blur(0);
+        }
+    }
     .header-outer {
         display: flex;
         justify-content: stretch;
@@ -20,22 +30,23 @@ import Rain from './rain/Rain.svelte'
         position: relative;
         left: 0;
         right: 0;
-    }
 
+
+    }
 
     .header {
         background: radial-gradient(200% 100% at bottom right,rgb(238, 130, 6) 0%, rgb(255, 199, 80) 50%, rgb(115, 223, 192)100%);
 
         z-index: 2;
-
+        
         border-radius: 0 0 1em 0;
         border-width: 2px;
         border-top: 0;
         border-style: solid;
         border-color: var(--border);
 
-        width: 67vw;
-        height: 30em;
+        width: 69vw;
+        height: 32em;
 
         padding: 1em;
 
@@ -45,6 +56,11 @@ import Rain from './rain/Rain.svelte'
         flex-direction: column;
         text-align: end;
         align-content: end;
+
+        animation-name: letsgooo;
+        animation-duration: .2s;
+        animation-timing-function:cubic-bezier(0.785, 0.135, 0.15, 0.86);
+        animation-play-state: running;
     }	
 
     .header h1 {

@@ -1,3 +1,7 @@
+---
+import { ACTION_ERROR_CODES } from "astro:actions";
+---
+
 <div class="about">
     <div class="about-title">
         <img src="/images/fungus.png" class="about-icon">
@@ -5,19 +9,19 @@
         About
     </div>
     <div class="shiny"/>
-    <ul class="about-list">
-        <li>
-            Hello. I am a <i>16 year old</i> living in the east of Ireland.
-        </li>
-        <li>
-            I generally really enjoy working on things within the intersection of computing and aesthetics.
-        </li>
-    </ul>
+    <div class="about-contents">
+        Hey! <br/>
+        I like screwing around with technical doohickeys of various varieties.<br/>
+        I try to do something along the lines of <div class="highlight">"software engineering"</div>, and I also draw (a little bit)!<br/>
+        I am often somewhat dumb and ambitious.<br/>
+        <br/><br/>
+        (if you couldn't already tell this site is a massive work in progress 😭😭😭)
+    </div>
 </div>
 
 <style>
     .about {
-        max-width: 36em;
+        width: 100%;
 
         position: relative;
 
@@ -69,9 +73,26 @@
         margin-top: -.1em;
     }
 
-    .about-list {
-        padding-top: 3em;
-        padding-right: 2em;
+    .about-contents {
+        padding: 2em;
+        padding-top: 4em;
+    }
+
+    .highlight {
+        display: inline-block;
+        padding: 0.25em;
+        padding-left: .5em;
+        padding-right: .5em;
+        background-color: #20488866;
+        color: #9098a4;
+        border-color: #9098a466;
+
+        font-weight: bold;
+
+        border-style: solid;
+        border-width: 2px;
+
+        border-radius: 5px;
     }
 </style>
 

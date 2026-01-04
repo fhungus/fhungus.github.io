@@ -53,45 +53,10 @@ class Drops {
             drop.velocity.y += 10 * dt;
 
             // was planning on adding mouse interactions but it too hard 😢 (i don't know what math i'm doing)
-            /*
             function iswithinrange(num: number, othernum: number, rangewidth: number): boolean {
                 return num > othernum - rangewidth && num < othernum + rangewidth
             }
-
-            // if mouse is in frame and droplet is too close, bounce it away
-            if (mouse != null && !drop.bounced && iswithinrange(drop.position.x, mouse.x, 20) && iswithinrange(drop.position.y, mouse.y, 20)) {
-                drop.bounced = true;
-
-                // uh oh calc time
-                let normal = add_vecs(drop.position, negate_vec(mouse));
-                let normmag = Math.sqrt((normal.x ^ 2) + (normal.y ^ 2));
-                normal.x = normal.x / normmag;
-                normal.y = normal.y / normmag;
-                let nx = drop.position.x - ((drop.position.x * normal.x) / (normal.x ^ 2));
-                let ny = drop.position.y - ((drop.position.y * normal.y) / (normal.y ^ 2));
-
-                console.log(nx);
-                drop.position = {
-                    x: nx,
-                    y: ny,
-                };
-
-                // get the difference between the new position and mouse to calculate our velocities new position
-                // and we're not slowing it down because its fun
-                let diffx = nx - mouse.x;
-                let diffy = ny - mouse.y;
-                let diffmag = Math.sqrt((normal.x ^ 2) + (normal.y ^ 2));
-                
-                diffx = diffx * (1 / diffmag);
-                diffy = diffy * (1 / diffmag);
-
-                let velmag = Math.sqrt(drop.velocity.x * drop.velocity.y);
-                drop.velocity = {
-                    x: diffx * velmag,
-                    y: diffy * velmag,
-                }
-            }
-            */
+           
             return drop;
         })
 
