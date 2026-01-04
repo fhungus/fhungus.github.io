@@ -7,7 +7,7 @@
     import range from './range'
 
     
-    let active = $state(localStorage.getItem("fish_paused") == "n");
+    let active = $state(localStorage.getItem("fish_paused") == "y");
 
     // i have GOTTA start abstracting some of this shit!!!
     class AffirmationEntity {
