@@ -9,16 +9,11 @@
         "/images/gifs/5.gif",
         "/images/gifs/6.gif",
         "/images/gifs/7.gif",
-        "https://images-ext-1.discordapp.net/external/5-qxq28IiE8SkcXfEBt4leMv_NkYEtoMp_1fiN9qKHs/https/media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyYmpmZzE4eGliOThvbmZkem9oanBicGs5NmJvODh5bzN5cGl5azBiMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/oVAtWqMtwTJ6IEGPx5/giphy.gif?width=528&height=524",
+        "/images/gifs/8.gif",
     ]
 
-    // preload the images so we can spam this shit!
-    // idk if this works, and i MIGHT make a system to load the images more intelligently
+    // TODO)) preload an image!!! also see if we keep the images we download or if we have to get them again each time...
     // also the whole gif thing is a lil underwhelming so i might have to just scrap it entirely
-    let preloaded_images = epic_gamer_list.map((link) => {
-        let newimage = new Image()
-        newimage.src = link
-    })
 
     let bigboy_imagery: string | null = $state(null);
     function bigboy_mouseenter() {
