@@ -1,4 +1,4 @@
-import range from './range.ts';
+import range from '../../lib/range';
 
 type Vec = {
     x: number,

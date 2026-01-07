@@ -4,10 +4,9 @@
     import { blur } from "svelte/transition";
     import { on } from 'svelte/events';
 
-    import range from './range'
-
+    import range from '../../lib/range'
     
-    let active = $state(localStorage.getItem("fish_paused") != "!");
+    let active = $state(localStorage.getItem("fish_paused") != "n");
 
     // i have GOTTA start abstracting some of this shit!!!
     class AffirmationEntity {
@@ -46,7 +45,8 @@
             this.vy += 500 * dt;
 
             // bounce off ground & ceiling
-            if (this.y > h - 15 && this.vy > 0 || this.y < 0 && this.vy < 0) {// EPIC magic number....
+            if (this.y > h && this.vy > 0 || this.y < 15 && this.vy < 0) {// EPIC magic number....
+                this.y = this.y > h ? h : 20
                 this.vy = this.vy * -0.8;
             }
 
@@ -114,7 +114,7 @@
             this.width = w;
             this.height = h;
             
-            const affirmations = 25;
+            const affirmations = 50;
             for (var i = 0; i < affirmations; i++) {
                 let affirmation_entity = new AffirmationEntity(w, h);
                 this.affirmations.push(affirmation_entity);
@@ -172,6 +172,7 @@
             last_scroll_position = window.scrollY;
 
             affirmations.affirmations.map((aff, _) => {
+                aff.y += delta
                 aff.vy += delta * 2
             })
         })
@@ -182,6 +183,11 @@
             let now = new Date().getTime();
             let mouse = new MousePosition(mousex, mousey, mouseincanvas)
             if (active) {
+            let rect = canvas.getBoundingClientRect();
+                canvas.height = rect.height;
+                canvas.width = rect.width;
+                affirmations.height = rect.height;
+                affirmations.width = rect.width;
                 affirmations.stepFrame((now - tick) / 1000, mouse)
                 ctx.clearRect(0,0,canvas.width,canvas.height);
                 ctx.font = `bold 14px GoMono`;
@@ -208,7 +214,7 @@
 <div class="affirmations">
     <button class="affirmations_button" onclick={()=>{
         active=!active
-        localStorage.setItem("fish_paused", active ? "n" : "y")
+        localStorage.setItem("fish_paused", active ? "y" : "n")
     }}>
         <div>
             {active ? "):<" : "(:"}

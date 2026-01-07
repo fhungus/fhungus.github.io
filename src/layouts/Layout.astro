@@ -1,5 +1,5 @@
 ---
-import Bar from "../components/Bar.astro";
+import Bar from "../components/Bar.svelte";
 ---
 
 <!doctype html>
@@ -41,7 +41,7 @@ import Bar from "../components/Bar.astro";
 				fill="url(#pattern-circles)"></rect>
 		</svg>
 
-		<Bar />
+		<Bar client:only="svelte"/>
 		<slot />
 		<footer>hello this is the footer we're footing it</footer>
 	</body>
