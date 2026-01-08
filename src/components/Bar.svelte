@@ -1,5 +1,7 @@
 <script lang="ts">
     import { blur } from "svelte/transition";
+    import { Spring } from "svelte/motion";
+    import { onMount } from "svelte";
     import range from "../lib/range";
     const epic_gamer_list = [
         "/images/gifs/1.gif",
@@ -15,6 +17,20 @@
     // TODO)) preload an image!!! also see if we keep the images we download or if we have to get them again each time...
     // also the whole gif thing is a lil underwhelming so i might have to just scrap it entirely
 
+    let body_spring = new Spring(0);
+
+    let last_scroll_position = 0;
+    onMount(() => {
+        last_scroll_position = window.scrollY;
+        document.addEventListener("scroll", () => {
+            let delta = window.scrollY - last_scroll_position;
+            last_scroll_position = window.scrollY;
+            
+            body_spring.set(body_spring.current - (delta * .05), {instant: true})
+            body_spring.set(0);
+        });
+    });
+
     let bigboy_imagery: string | null = $state(null);
     function bigboy_mouseenter() {
         let rand = Math.ceil(range(Math.random(), 0, 1, 0, epic_gamer_list.length - 1))
@@ -27,7 +43,7 @@
     }
 </script>
 
-<div class="bar">
+<div class="bar" style="bottom: calc(1em + {body_spring.current}px); transform: rotateX({-body_spring.current}deg);">
     <div class="bartextlink bigboy bordered" onmouseenter={bigboy_mouseenter} onmouseleave={bigboy_mouseleave} role="button" tabindex="-1">
         {#if bigboy_imagery != null}
             <img alt="epic gif?!, idk" transition:blur src={bigboy_imagery}/>
@@ -41,7 +57,6 @@
     .bar {
         position: fixed;
         right: 1em;
-        bottom: 1em;
         background-color: var(--bg2);
 
         border-radius: 5px;
@@ -56,6 +71,7 @@
         padding: 0.2em;
 
         display: flex;
+
     }
 
     .bartextlink {
