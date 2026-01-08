@@ -16,7 +16,7 @@ const accent = frontmatter?.color != null ? frontmatter.color : "#d58847";
 	</head>
 
 	<body>
-		<Bar />
+		<Bar client:only="svelte"/>
         <div class="content-wrapper">
             <div class="content-title">
                 <h1> {frontmatter?.title} </h1>

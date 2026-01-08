@@ -31,9 +31,6 @@
         "/images/gifs/8.gif",
     ]
 
-    // TODO)) preload an image!!! also see if we keep the images we download or if we have to get them again each time...
-    // also the whole gif thing is a lil underwhelming so i might have to just scrap it entirely
-
     let getRandomLink = () => {
         let rand = Math.ceil(range(Math.random(), 0, 1, 0, epic_gamer_list.length - 1))
 
