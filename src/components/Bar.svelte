@@ -3,20 +3,8 @@
     import { Spring } from "svelte/motion";
     import { onMount } from "svelte";
     import range from "../lib/range";
-    const epic_gamer_list = [
-        "/images/gifs/1.gif",
-        "/images/gifs/2.gif",
-        "/images/gifs/3.gif",
-        "/images/gifs/4.gif",
-        "/images/gifs/5.gif",
-        "/images/gifs/6.gif",
-        "/images/gifs/7.gif",
-        "/images/gifs/8.gif",
-    ]
 
-    // TODO)) preload an image!!! also see if we keep the images we download or if we have to get them again each time...
-    // also the whole gif thing is a lil underwhelming so i might have to just scrap it entirely
-
+    // springothy...
     let body_spring = new Spring(0);
 
     let last_scroll_position = 0;
@@ -31,11 +19,36 @@
         });
     });
 
+    // bar funny image related things
+    const epic_gamer_list = [
+        "/images/gifs/1.gif",
+        "/images/gifs/2.gif",
+        "/images/gifs/3.gif",
+        "/images/gifs/4.gif",
+        "/images/gifs/5.gif",
+        "/images/gifs/6.gif",
+        "/images/gifs/7.gif",
+        "/images/gifs/8.gif",
+    ]
+
+    // TODO)) preload an image!!! also see if we keep the images we download or if we have to get them again each time...
+    // also the whole gif thing is a lil underwhelming so i might have to just scrap it entirely
+
+    let getRandomLink = () => {
+        let rand = Math.ceil(range(Math.random(), 0, 1, 0, epic_gamer_list.length - 1))
+
+        // create a new image object which we immediately forget about, which should force the browser to load whatever image we linked...
+        let image = new Image();
+        image.src = epic_gamer_list[rand]
+
+        return image.src;
+    }
+
+    let nextup = getRandomLink();
     let bigboy_imagery: string | null = $state(null);
     function bigboy_mouseenter() {
-        let rand = Math.ceil(range(Math.random(), 0, 1, 0, epic_gamer_list.length - 1))
-        bigboy_imagery = epic_gamer_list[rand];
-        console.log(bigboy_imagery)
+        bigboy_imagery = nextup;
+        nextup = getRandomLink();
     }
 
     function bigboy_mouseleave() {
