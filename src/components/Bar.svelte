@@ -20,16 +20,7 @@
     });
 
     // bar funny image related things
-    const epic_gamer_list = [
-        "/images/gifs/1.gif",
-        "/images/gifs/2.gif",
-        "/images/gifs/3.gif",
-        "/images/gifs/4.gif",
-        "/images/gifs/5.gif",
-        "/images/gifs/6.gif",
-        "/images/gifs/7.gif",
-        "/images/gifs/8.gif",
-    ]
+    const epic_gamer_list: string[] = ([] as string[]).fill(" ", 0, 28).map((_, i) => `/images/gifs/${i+1}.gif`); // my very secret schema... nyess...
 
     let getRandomLink = () => {
         let rand = Math.ceil(range(Math.random(), 0, 1, 0, epic_gamer_list.length - 1))
