@@ -8,6 +8,14 @@
     let body_spring = new Spring(0);
 
     let last_scroll_position = 0;
+
+    let toload: string[] = [];
+    let evilassfunction = (link: string) => {
+        // queue up the links to load, this will be replaced on mount!
+        toload.push(link);
+        return link;
+    }
+
     onMount(() => {
         last_scroll_position = window.scrollY;
         document.addEventListener("scroll", () => {
@@ -17,6 +25,14 @@
             body_spring.set(body_spring.current - (delta * .05), {instant: true})
             body_spring.set(0);
         });
+
+        // replace the evil ass function, make it save the contents of the next image to cache! 
+        evilassfunction = (link: string) => {
+            let image = new Image(); // we can't use these outside of onMount() or svelte will jumpscare us
+            image.src = link;
+            return link;
+        } 
+        toload.map(evilassfunction); // load the queued images using our epic new function
     });
 
     // bar funny image related things
@@ -29,10 +45,7 @@
         let rand = Math.ceil(range(Math.random(), 0, 1, 0, epic_gamer_list.length - 1))
 
         // create a new image object which we immediately forget about, which should force the browser to load whatever image we linked...
-        let image = new Image();
-        image.src = epic_gamer_list[rand]
-
-        return image.src;
+        return evilassfunction(epic_gamer_list[rand])
     }
 
     let nextup = getRandomLink();
