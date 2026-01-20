@@ -3,10 +3,12 @@
     import { onMount } from "svelte";
     import { blur } from "svelte/transition";
     import { on } from 'svelte/events';
+    import { Spring } from "svelte/motion";
 
     import range from '../../lib/range'
     
     let active = $state(localStorage.getItem("fish_paused") != "n");
+    let offset = new Spring(0);
 
     // i have GOTTA start abstracting some of this shit!!!
     class AffirmationEntity {
@@ -52,6 +54,10 @@
 
             // bounce from sides
             if (this.x <= 0 && this.vx < 0 || this.x >= w  && this.vx > 0) {
+                // push the frames springs a bit
+                offset.set(offset.current + this.vx * 0.001, {instant: true});
+                offset.set(0);
+
                 this.vx *= -1;
             }
 
@@ -211,7 +217,7 @@
         }
     })
 </script>
-<div class="affirmations">
+<div class="affirmations" style="margin-left:{offset.current}px; margin-right:{-offset.current}px;">
     <button class="affirmations_button" onclick={()=>{
         active=!active
         localStorage.setItem("fish_paused", active ? "y" : "n")
