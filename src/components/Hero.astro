@@ -1,10 +1,11 @@
 ---
 import Rain from './rain/Rain.svelte'
+import HeroText from './HeroText.svelte'
 ---
 
 <div class="header-outer">
     <div class="header">
-        <h1 class="header-title">fhungus</h1>
+        <HeroText client:only="svelte"/>
         <Rain client:only="svelte"/>
     </div>
     <div class="outer-image">
@@ -13,16 +14,6 @@ import Rain from './rain/Rain.svelte'
 </div>
 
 <style>
-    @keyframes letsgooo {
-        0% {
-            filter: opacity(0) brightness(2) blur(50px);
-        }
-        70% {
-        }
-        100% {
-            filter: opacity(1) brightness(1) blur(0);
-        }
-    }
     .header-outer {
         display: flex;
         justify-content: stretch;
@@ -30,8 +21,6 @@ import Rain from './rain/Rain.svelte'
         position: relative;
         left: 0;
         right: 0;
-
-
     }
 
     .header {
@@ -54,30 +43,14 @@ import Rain from './rain/Rain.svelte'
 
         display: flexbox;
         flex-direction: column;
-        text-align: end;
         align-content: end;
-
-        animation-name: letsgooo;
-        animation-duration: .2s;
-        animation-timing-function:cubic-bezier(0.785, 0.135, 0.15, 0.86);
-        animation-play-state: running;
+        justify-content: end;
     }	
-
-    .header h1 {
-        mix-blend-mode: color-dodge;
-        color: #5cb396;
-
-        margin-right: 0.2em;
-
-        font-size: 10em;
-        font-weight: 500;
-    }
 
     @media (width <= 80rem) {
         .header {
             width: 100vw;
             border-radius: 0vw;
-            text-align: start;
         }
         .outer-image {
             z-index: 2;
