@@ -1,11 +1,48 @@
 <script lang="ts">
     import { blur } from "svelte/transition";
-    import { Spring } from "svelte/motion";
+    import { Spring, Tween } from "svelte/motion";
     import { onMount } from "svelte";
     import range from "../lib/range";
+    import { derived } from "svelte/store";
+
+    const sections: {text: string, path: string, imagery: string}[] = [
+        {
+            text: "blog",
+            path: "/blog/",
+            imagery: "/"
+        },        
+        {
+            text: "projects",
+            path: "/proj/",
+            imagery: "/"
+        },
+        {
+            text: "drawings",
+            path: "/draw/",
+            imagery: "/"
+        },
+        { // we gotta put home last because every other path also qualifies as it ):
+            text: "home",
+            path: "/",
+            imagery: "/"
+        },
+    ]
 
     // springothy...
     let body_spring = new Spring(0);
+
+    // fun element! the stalker: follows and surrounds the selected object
+    let selected = $state(sections.findIndex((sect) => {
+        return window.location.pathname.startsWith(sect.path)
+    }) || 0)
+    let stalker_position = {
+        x: new Spring(0),
+        w: new Spring(1),
+        h: new Spring(1)
+    }
+
+    let container: Element;
+    let stalker: Element;
 
     let last_scroll_position = 0;
 
@@ -14,6 +51,34 @@
         // queue up the links to load, this will be replaced on mount!
         toload.push(link);
         return link;
+    }
+
+    $inspect(stalker_position)
+
+    let setStalkerRect = (rect: DOMRect, instant: boolean | null) => {
+        let props = {
+            instant: instant || undefined
+        };
+        stalker_position.h.set(rect.height, props);
+        stalker_position.w.set(rect.width, props);
+        stalker_position.x.set(rect.x - container.getBoundingClientRect().x, props);
+    }
+
+    let resetStalkerToSelected = (instant: boolean) => {
+        // get current ob        
+        let children = container.children
+        let path_element;
+        for(let i=0;i<=children.length;i++) {
+            let child = children.item(i);
+            if (sections[selected].path == child?.id) {
+                path_element = child
+                break;
+            };
+        };
+
+        if (path_element) {
+            setStalkerRect(path_element.getBoundingClientRect(), instant);
+        }
     }
 
     onMount(() => {
@@ -33,6 +98,8 @@
             return link;
         } 
         toload.map(evilassfunction); // load the queued images using our epic new function
+
+        resetStalkerToSelected(true);
     });
 
     // bar funny image related things
@@ -60,6 +127,17 @@
     }
 </script>
 
+{#snippet section(text: string, path: string, imagery: string, i: number)}
+    <button id={path} data-imagery={imagery} 
+    onmouseenter={(e)=>{
+        setStalkerRect(e.currentTarget.getBoundingClientRect(), false);
+    }} 
+    onmouseleave={()=>{resetStalkerToSelected(false)}}
+    onmousedown={()=>{if (window.location.pathname != path) { window.location.pathname = path}}}>
+        {text}
+    </button>
+{/snippet}
+
 <div class="bar" style="bottom: calc(1em + {body_spring.current}px); transform: rotateX({-body_spring.current}deg);">
     <div class="bartextlink bigboy bordered" onmouseenter={bigboy_mouseenter} onmouseleave={bigboy_mouseleave} role="button" tabindex="-1">
         {#if bigboy_imagery != null}
@@ -67,7 +145,15 @@
         {/if}
         <p>fhungus</p>
     </div>
+
     <div class="divider"></div>
+
+    <div class="sections" bind:this={container}>
+        <div bind:this={stalker} class="stalker" style="left:{stalker_position.x.current}px; width:{stalker_position.w.current}px; height:{stalker_position.h.current}px;"></div>
+        {#each sections as s, i}
+            {@render section(s.text, s.path, s.imagery, i)}
+        {/each}
+    </div>
 </div>
 
 <style>
@@ -88,11 +174,38 @@
         padding: 0.2em;
 
         display: flex;
-
     }
 
     .bartextlink {
         line-height: 0;
+    }
+
+    .sections {
+        position: relative;
+        display: flex;
+        background-color: var(--bg);
+    }
+
+    .sections > button {
+        display: flex;
+        align-items: center;
+        padding-left: 2em;
+        padding-right: 2em;
+        background-color: transparent;
+        border-style: none;
+
+		font-family: GoMono, monospace;
+        color: var(--fg);
+
+        z-index: 10;
+    }
+
+    .stalker {
+        background-color: var(--bg2);
+        content: " ";
+        position: absolute;
+
+        z-index: 0;
     }
 
     .divider {

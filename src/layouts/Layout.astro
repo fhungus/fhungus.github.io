@@ -13,7 +13,7 @@ import Bar from "../components/Bar.svelte";
 	</head>
 
 	<body>
-		<!--I STOLE THIS!!! -->
+		<!--I STOLE THIS PATTERN!!!!!! -->
 		<svg width="100%" height="100%" class="background-pattern">
 			<pattern
 				id="pattern-circles"
@@ -42,7 +42,10 @@ import Bar from "../components/Bar.svelte";
 		</svg>
 
 		<Bar client:only="svelte"/>
+
 		<slot />
+
+		<div class="evilassfooterspacer"></div>
 		<footer>hello this is the footer we're footing it</footer>
 	</body>
 </html>
@@ -115,9 +118,19 @@ import Bar from "../components/Bar.svelte";
 		border-color: var(--border);
 	}
 
-	footer {
-		margin-top: 10em;
+	.evilassfooterspacer {
+		content: " ";
 		position: relative;
+
+		bottom: 0;
+		right: 0;
+		left: 0;
+
+		height: 10em;
+	}
+
+	footer {
+		position: absolute;
 		bottom: 0;
 		right: 0;
 		left: 0;

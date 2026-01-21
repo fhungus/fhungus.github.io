@@ -13,7 +13,7 @@
         function shaking() {
             const intensity = 5;
             const yintensity = 5;
-            const rotintensity = 10;
+            const rotintensity = 5;
             text_states.forEach(element => {
                 element[0] = range(Math.random(), 0, 1, -intensity / 2, intensity / 2);
                 element[1] = range(Math.random(), 0, 1, -yintensity / 2, yintensity / 2);

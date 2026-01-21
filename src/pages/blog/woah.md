@@ -1,13 +1,9 @@
 ---
 layout: ./Layout.astro
-title: mein page...
+title: (test article) fhungus technological... getting started? gas or bass?
 ---
-Shit could get..
+this is Fhungus Technological article...
 
-*MENACING*
-
-**FRIGHTENING**
-
-## [FIND HELP!]
-
-<sup>Sometimes, i scare, myself (myself)</sup>
+here is information to get you started:
+1: Don't tap the Gas 💨💨💨 Don't tap the Gaaassss💨
+2: Don't tap the Gas 💨💨💨 Mmmmm...
