@@ -32,13 +32,14 @@
     let body_spring = new Spring(0);
 
     // fun element! the stalker: follows and surrounds the selected object
+    const stalker_gap = 3;
     let selected = $state(sections.findIndex((sect) => {
         return window.location.pathname.startsWith(sect.path)
     }) || 0)
     let stalker_position = {
         x: new Spring(0),
         w: new Spring(1),
-        h: new Spring(1)
+        h: new Spring(1),
     }
 
     let container: Element;
@@ -59,9 +60,9 @@
         let props = {
             instant: instant || undefined
         };
-        stalker_position.h.set(rect.height, props);
-        stalker_position.w.set(rect.width, props);
-        stalker_position.x.set(rect.x - container.getBoundingClientRect().x, props);
+        stalker_position.h.set(rect.height - (2*stalker_gap), props);
+        stalker_position.w.set(rect.width - (2*stalker_gap), props);
+        stalker_position.x.set(rect.x + stalker_gap - container.getBoundingClientRect().x, props);
     }
 
     let resetStalkerToSelected = (instant: boolean) => {
@@ -149,7 +150,7 @@
     <div class="divider"></div>
 
     <div class="sections" bind:this={container}>
-        <div bind:this={stalker} class="stalker" style="left:{stalker_position.x.current}px; width:{stalker_position.w.current}px; height:{stalker_position.h.current}px;"></div>
+        <div bind:this={stalker} class="stalker" style="left:{stalker_position.x.current}px; top:{stalker_gap}px; width:{stalker_position.w.current}px; height:{stalker_position.h.current}px;"></div>
         {#each sections as s, i}
             {@render section(s.text, s.path, s.imagery, i)}
         {/each}
